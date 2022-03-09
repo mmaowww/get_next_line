@@ -6,12 +6,12 @@
 /*   By: ebetrix <ebetrix@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 16:40:51 by ebetrix           #+#    #+#             */
-/*   Updated: 2022/02/14 17:43:14 by ebetrix          ###   ########.ch       */
+/*   Updated: 2022/03/09 16:06:04 by ebetrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GETNEXTLINE_H
-# define GETNEXTLINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <fcntl.h>
 # include <limits.h>
 # include <stdlib.h>
@@ -20,5 +20,7 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
+int		ft_strlen_gnl(char *str);
+char	*ft_strjoin_gnl(char *s1, char c);
 
 #endif
