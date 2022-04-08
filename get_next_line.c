@@ -6,7 +6,7 @@
 /*   By: ebetrix <ebetrix@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:26:57 by ebetrix           #+#    #+#             */
-/*   Updated: 2022/03/09 17:08:42 by ebetrix          ###   ########.fr       */
+/*   Updated: 2022/04/08 12:32:53 by ebetrix          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,31 @@ char	*ft_strjoin_gnl(char *s1, char c)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd)		//La fonction principale
 {
-	char	c;
-	char	*line;
+	char	c;			//Un caractère
+	char	*line;			//La ligne renvoyée
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 256 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 256 || read(fd, 0, 0) < 0) //La gestion d'erreur
 		return (NULL);
-	if (read(fd, &c, 1) == 0)
+	if (read(fd, &c, 1) == 0)	//On lit un caractère, si le fichier est vide, la fonction renvoie 0 et s'arrête.
 		return (NULL);
-	line = malloc(sizeof(char) * 1);
-	if (!line)
+	line = malloc(sizeof(char) * 1); //On assigne la ligne avec malloc.
+	if (!line)			//Gestion d'erreur du malloc.
 		free(line);
-	line[0] = '\0';
-	line = ft_strjoin_gnl(line, c);
-	if (c == '\n')
+	line[0] = '\0';			//Le premier et unique caractère de cette ligne ne contient rien, pour être sûr qu'il n'a rien stocké de random.
+	line = ft_strjoin_gnl(line, c);	//On crée la ligne avec le premier caractère lu.
+	if (c == '\n')			//Si ce premier caractère est un retour à la ligne, on renvoie la ligne.
 		return (line);
-	while (read(fd, &c, 1) != 0)
+	while (read(fd, &c, 1) != 0)	//On boucle tant qu'il y a de quoi lire.
 	{
-		if (c == 0)
+		if (c == 0)		//Gestion d'erreur - pas sûre qu'elle soit nécessaire ici.
 			return (NULL);
-		line = ft_strjoin_gnl(line, c);
-		if (c == '\n')
+		line = ft_strjoin_gnl(line, c); //On crée la ligne caractère par caractère.
+		if (c == '\n')		//Dès que le caractère est un retour à la ligne, on renvoie la ligne et la fonction s'arrête.
 			return (line);
 	}
-	if (line)
+	if (line)			//Renvoie la dernière la ligne - pas sûre qu'il faille un "if".
 		return (line);
 	return (0);
 }
